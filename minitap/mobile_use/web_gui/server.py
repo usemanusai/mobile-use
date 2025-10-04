@@ -120,8 +120,12 @@ async def on_startup():
     logger.info(f"Web GUI starting on port {port}")
     await broadcaster.publish({"type": "status", "status": "Initializing..."})
     await broadcaster.publish({"type": "queue", "size": 0})
-    # Start the persistent worker loop
-    await manager.start()
+    # Optionally start the persistent worker loop (can be disabled via AUTO_START_AGENT=0)
+    if os.getenv("AUTO_START_AGENT", "1") == "1":
+        await manager.start()
+    else:
+        manager.status = "Ready"
+        await broadcaster.publish({"type": "status", "status": manager.status})
 
 
 @app.get("/", response_class=HTMLResponse)
