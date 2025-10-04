@@ -6,6 +6,7 @@ services:
     container_name: mobile-use-full
     user: "mobile-use:mobile-use"
     restart: no
+    command: ["serve", "--port", "8086"]
     env_file:
       - .env
     environment:
@@ -28,6 +29,7 @@ services:
     container_name: mobile-use-full-usb
     user: "mobile-use:mobile-use"
     restart: no
+    command: ["serve", "--port", "8086"]
     env_file:
       - .env
     privileged: true
