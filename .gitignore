@@ -1,0 +1,31 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.coverage
+**/mobile-use.egg-info
+*.egg-info/
+dist/
+build/
+
+# Env
+.env
+
+# History / vendor (excluded from VCS and formatting/linting)
+.history/
+nicegui/
+
+# User config
+llm-config.override.jsonc
+
+# Output files
+output/
+*.json
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

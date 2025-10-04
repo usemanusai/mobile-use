@@ -1,0 +1,105 @@
+name: Quality Assurance
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-verify:
+    name: build-and-verify (lint, test, build)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install project (uv)
+        run: |
+          uv python install ${{ matrix.python-version }}
+          uv sync --all-extras --dev
+
+      - name: Lint (ruff)
+        run: uv run ruff --version && uv run ruff .
+
+      - name: Format check (black)
+        run: uv run black --version && uv run black --check .
+
+      - name: Run tests (pytest + coverage)
+        run: |
+          uv run python -m pip install coverage pytest-cov
+          uv run pytest -q --maxfail=1 --disable-warnings --cov --cov-report=xml
+
+      - name: Build package
+        run: |
+          uv run python -m pip install build
+          uv run python -m build
+
+  security-scan:
+    name: security-scan (SCA, SAST)
+    runs-on: ubuntu-latest
+    needs: build-and-verify
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Dependency Review (PRs only)
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          ignore-unfixed: true
+          format: table
+          exit-code: 1
+          severity: HIGH,CRITICAL
+
+      - name: Python dependency audit (pip-audit)
+        uses: pypa/gh-action-pip-audit@v1
+        with:
+          vulnerability-service: osv
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  # end-to-end-tests:
+  #   name: end-to-end-tests (scaffold)
+  #   needs: build-and-verify
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     # TODO: Build and deploy application to a temporary staging environment.
+  #     # TODO: Run the E2E test suite (e.g., using Playwright or Cypress).
+

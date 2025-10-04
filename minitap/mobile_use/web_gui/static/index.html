@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mobile-Use Web GUI</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header>
+    <div id="status"><span id="statusText">Initializing...</span> • <span id="queueLen">Queue: 0</span></div>
+    <div class="header-actions">
+      <button id="clearChat">Clear Chat</button>
+      <button id="shutdownBtn">Shutdown</button>
+    </div>
+  </header>
+  <main id="chat"></main>
+  <footer>
+    <div class="inputs">
+      <textarea id="taskInput" rows="3" placeholder="Describe the task you want the agent to perform on your mobile device..."></textarea>
+      <div id="advanced" class="hidden">
+        <input id="outputDesc" type="text" placeholder="Optional: Describe the expected output format" />
+      </div>
+      <div class="actions">
+        <button id="toggleAdvanced">Show advanced options</button>
+        <button id="enhanceBtn">Enhance</button>
+        <button id="sendBtn" class="primary">Send</button>
+      </div>
+    </div>
+  </footer>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
+

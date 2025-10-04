@@ -1,0 +1,35 @@
+exclude: ^(nicegui/|\.history/)
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+      - id: ruff-format
+
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+        args: ["--line-length=100"]
+
+  # Optional: requires gitleaks binary available on PATH
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: gitleaks (secrets scan)
+        entry: gitleaks protect --staged --redact
+        language: system
+        pass_filenames: false
+        stages: [commit]
+

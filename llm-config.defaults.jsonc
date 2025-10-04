@@ -1,0 +1,71 @@
+// Here is the default config that will be used if no override is provided.
+{
+  "default": {
+    "planner": {
+      "provider": "openai",
+      "model": "gpt-5-nano"
+    },
+    "orchestrator": {
+      "provider": "openai",
+      "model": "gpt-5-nano"
+    },
+    "cortex": {
+      "provider": "openai",
+      "model": "gpt-5",
+      "fallback": {
+        "provider": "openai",
+        "model": "gpt-5"
+      }
+    },
+    "executor": {
+      "provider": "openai",
+      "model": "gpt-5-nano"
+    },
+    "utils": {
+      "hopper": {
+        // Needs at least a 256k context window.
+        "provider": "openai",
+        "model": "gpt-4.1"
+      },
+      "outputter": {
+        "provider": "openai",
+        "model": "gpt-5-nano"
+      }
+    }
+  },
+  // This is the config we recommend.
+  // To use it, copy it to llm.override.jsonc, following llm.override.template.jsonc.
+  "recommended": {
+    "planner": {
+      "provider": "openrouter",
+      "model": "meta-llama/llama-4-scout"
+    },
+    "orchestrator": {
+      "provider": "openrouter",
+      "model": "openai/gpt-oss-120b"
+    },
+    "cortex": {
+      "provider": "google",
+      "model": "gemini-2.5-flash",
+      "fallback": {
+        "provider": "openai",
+        "model": "gpt-5"
+      }
+    },
+    "executor": {
+      "provider": "openai",
+      "model": "gpt-5-nano"
+    },
+    "utils": {
+      "hopper": {
+        // Needs at least a 256k context window.
+        "provider": "openai",
+        "model": "gpt-4.1"
+      },
+      "outputter": {
+        "provider": "openai",
+        "model": "gpt-5-nano"
+      }
+    }
+  }
+}
