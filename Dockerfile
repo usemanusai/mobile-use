@@ -60,10 +60,10 @@ ENV PATH="/opt/maestro/bin:${PATH}"
 WORKDIR /app
 
 # Copy the Python version
-COPY --from=builder --chown=python:python /python /python
+COPY --from=builder --chown=mobile-use:mobile-use /python /python
 
 # Copy the application from the builder
-COPY --from=builder --chown=app:app /app /app
+COPY --from=builder --chown=mobile-use:mobile-use /app /app
 ENV PATH="/app/.venv/bin:$PATH"
 
 COPY --chown=mobile-use:mobile-use docker-entrypoint.sh /app/docker-entrypoint.sh
