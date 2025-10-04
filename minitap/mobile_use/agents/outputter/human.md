@@ -20,6 +20,6 @@ Please generate a well-structured JSON object based on the following instruction
 
 > "{{ output_description }}"
 
-Only return the JSON object, with fields matching the description as closely as possible.  
+Only return the JSON object, with fields matching the description as closely as possible.
 Do not include explanations or markdown, just the raw JSON.
 {% endif %}

@@ -101,4 +101,3 @@ This repo uses pre-commit hooks and CI gates to keep code quality and security h
 CI (GitHub Actions) runs:
 - Lint, format check, tests + coverage, package build
 - Security: dependency-review (PRs), Trivy filesystem scan, pip-audit, CodeQL
-

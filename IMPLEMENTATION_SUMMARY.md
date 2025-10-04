@@ -27,15 +27,15 @@ ConnectionError: {"object":"error","message":"[{'type': 'literal_error', 'loc': 
 ```python
 def get_openrouter_llm(model_name: str, temperature: float = 1):
     client = ChatOpenAI(...)
-    
+
     # Monkey-patch to use json_object instead of json_schema
     original_with_structured_output = client.with_structured_output
-    
+
     def patched_with_structured_output(schema, **kwargs):
         kwargs['method'] = 'json_mode'
         kwargs['include_raw'] = False
         return original_with_structured_output(schema, **kwargs)
-    
+
     client.with_structured_output = patched_with_structured_output
     return client
 ```
@@ -246,4 +246,3 @@ All requested issues have been fixed:
 4. ✅ **Errors**: All ConnectionError and json_schema errors resolved
 
 The system is now production-ready for use with OpenRouter free models!
-

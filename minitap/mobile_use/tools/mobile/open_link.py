@@ -28,9 +28,11 @@ def get_open_link_tool(ctx: MobileUseContext):
         has_failed = output is not None
         tool_message = ToolMessage(
             tool_call_id=tool_call_id,
-            content=open_link_wrapper.on_failure_fn()
-            if has_failed
-            else open_link_wrapper.on_success_fn(url),
+            content=(
+                open_link_wrapper.on_failure_fn()
+                if has_failed
+                else open_link_wrapper.on_success_fn(url)
+            ),
             additional_kwargs={"error": output} if has_failed else {},
             status="error" if has_failed else "success",
         )

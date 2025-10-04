@@ -199,4 +199,3 @@ Practical recommendation:
 - Secret scanning push protection: https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection
 - Docker Compose v2: https://docs.docker.com/compose/ | Port binding cautions: https://www.jeffgeerling.com/blog/2020/be-careful-docker-might-be-exposing-ports-world
 - FastAPI SSE: https://github.com/sysid/sse-starlette | https://fastapi.tiangolo.com/advanced/custom-response/
-

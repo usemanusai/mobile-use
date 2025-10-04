@@ -203,9 +203,9 @@ class TaskRequestBuilder[TIn](TaskRequestCommonBuilder):
 
         task_request = TaskRequest(
             goal=self._goal,
-            profile=self._profile.name
-            if isinstance(self._profile, AgentProfile)
-            else self._profile,
+            profile=(
+                self._profile.name if isinstance(self._profile, AgentProfile) else self._profile
+            ),
             task_name=self._name,
             output_description=self._output_description,
             output_format=self._output_format,

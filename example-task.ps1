@@ -49,4 +49,3 @@ if (Test-Path "./output/results.json") {
 }
 
 Write-Host "For more examples, see QUICK_START.md" -ForegroundColor Cyan
-

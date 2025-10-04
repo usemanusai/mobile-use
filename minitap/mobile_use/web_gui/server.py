@@ -2,7 +2,7 @@ import asyncio
 import os
 import time
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
@@ -89,7 +89,7 @@ class AgentManager:
             self.queue.task_done()
             await broadcaster.publish({"type": "queue", "size": max(self.queue.qsize(), 0)})
 
-    async def _run_task(self, goal: str, output_description: str | None) -> Dict[str, Any]:
+    async def _run_task(self, goal: str, output_description: str | None) -> dict[str, Any]:
         assert self.agent is not None
         self.status = "Executing task"
         await broadcaster.publish({"type": "status", "status": self.status, "goal": goal})
@@ -145,6 +145,7 @@ async def stream():
     async def event_generator():
         async for event in broadcaster.subscribe():
             yield event
+
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 
@@ -204,7 +205,9 @@ async def api_enhance(req: Request):
             base_url="https://openrouter.ai/api/v1",
             temperature=0.2,
         )
-        msg = llm.invoke([SystemMessage(content=sys_prompt), HumanMessage(content=f"Original task: {text}")])
+        msg = llm.invoke(
+            [SystemMessage(content=sys_prompt), HumanMessage(content=f"Original task: {text}")]
+        )
         enhanced = msg.content if isinstance(msg.content, str) else str(msg.content)
         return {"ok": True, "enhanced": enhanced}
     except Exception as e:
@@ -217,4 +220,3 @@ def run():
 
     port = int(os.getenv("WEB_GUI_PORT", "8086"))
     uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
-

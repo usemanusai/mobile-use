@@ -9,7 +9,7 @@ All requested issues have been **fully resolved**:
 
 Added comprehensive retry logic with exponential backoff to all agent nodes:
 - **Planner Agent**: 3 retries with 2s, 4s, 8s delays
-- **Orchestrator Agent**: 3 retries with 2s, 4s, 8s delays  
+- **Orchestrator Agent**: 3 retries with 2s, 4s, 8s delays
 - **Cortex Agent**: 3 retries with 2s, 4s, 8s delays
 
 The system now automatically retries on failures instead of stopping immediately.
@@ -323,4 +323,3 @@ If you encounter issues:
 ---
 
 **Ready to use?** Run `test-setup.ps1` and start automating! 🚀
-

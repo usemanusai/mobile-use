@@ -34,4 +34,3 @@
 ## 8. Ownership
 - Product owner / Tech lead
 - Stakeholders
-

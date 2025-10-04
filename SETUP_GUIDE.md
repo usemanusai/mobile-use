@@ -21,7 +21,7 @@ Input should be 'text', 'json', 'json_object' or 'structural_tag'
 [Maestro Studio]: Enable analytics? [Y/n]
 ```
 
-**Solution**: 
+**Solution**:
 - Added environment variables to disable analytics in `minitap/mobile_use/servers/device_hardware_bridge.py`
 - Filtered out analytics messages from stdout
 - Added `MAESTRO_DISABLE_ANALYTICS=true` to `.env` file
@@ -127,7 +127,7 @@ Analytics are now disabled by default.
 Retry logic now handles temporary failures.
 
 ### Issue: Connection errors
-**Solution**: 
+**Solution**:
 - Check your internet connection
 - Verify your OpenRouter API key
 - Check if you've hit rate limits (wait a few minutes)
@@ -206,4 +206,3 @@ For issues or questions:
 | `.gitignore` | Added output directory |
 
 All changes are backward compatible and improve system reliability.
-

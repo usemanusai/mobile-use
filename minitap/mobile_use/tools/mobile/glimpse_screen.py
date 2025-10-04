@@ -39,9 +39,11 @@ def get_glimpse_screen_tool(ctx: MobileUseContext):
 
         tool_message = ToolMessage(
             tool_call_id=tool_call_id,
-            content=glimpse_screen_wrapper.on_failure_fn()
-            if has_failed
-            else glimpse_screen_wrapper.on_success_fn(),
+            content=(
+                glimpse_screen_wrapper.on_failure_fn()
+                if has_failed
+                else glimpse_screen_wrapper.on_success_fn()
+            ),
             additional_kwargs={"error": output} if has_failed else {},
             status="error" if has_failed else "success",
         )

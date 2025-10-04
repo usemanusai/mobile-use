@@ -103,6 +103,8 @@ target-version = "py312"
 select = ["E", "F", "TID", "UP"]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
+extend-ignore = ["E501"]
+
 fixable = ["ALL"]
 unfixable = []
 
@@ -164,8 +166,8 @@ dev = [
 [tool.black]
 line-length = 100
 # Keep in sync with ruff excludes
-exclude = """
+exclude = '''
 (
   ^/(\.history|nicegui)/
 )
-"""
+'''

@@ -107,7 +107,11 @@ class DeviceHardwareBridge:
             line = line.strip()
 
             # Filter out analytics-related messages
-            if "Enable analytics" in line or "Usage data collection" in line or "would like to collect" in line:
+            if (
+                "Enable analytics" in line
+                or "Usage data collection" in line
+                or "would like to collect" in line
+            ):
                 continue
 
             print(f"[Maestro Studio]: {line}")

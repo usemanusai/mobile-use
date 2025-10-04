@@ -46,9 +46,11 @@ def get_copy_text_from_tool(ctx: MobileUseContext):
         has_failed = output is not None
         tool_message = ToolMessage(
             tool_call_id=tool_call_id,
-            content=copy_text_from_wrapper.on_failure_fn(selector_request)
-            if has_failed
-            else copy_text_from_wrapper.on_success_fn(selector_request),
+            content=(
+                copy_text_from_wrapper.on_failure_fn(selector_request)
+                if has_failed
+                else copy_text_from_wrapper.on_success_fn(selector_request)
+            ),
             additional_kwargs={"error": output} if has_failed else {},
             status="error" if has_failed else "success",
         )

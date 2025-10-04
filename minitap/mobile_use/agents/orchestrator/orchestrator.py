@@ -87,10 +87,12 @@ class OrchestratorNode:
             except Exception as e:
                 last_error = e
                 error_msg = str(e)
-                logger.warning(f"Orchestrator LLM call failed (attempt {attempt + 1}/{max_retries}): {error_msg}")
+                logger.warning(
+                    f"Orchestrator LLM call failed (attempt {attempt + 1}/{max_retries}): {error_msg}"
+                )
 
                 if attempt < max_retries - 1:
-                    wait_time = retry_delay * (2 ** attempt)
+                    wait_time = retry_delay * (2**attempt)
                     logger.info(f"Retrying in {wait_time} seconds...")
                     await asyncio.sleep(wait_time)
                 else:

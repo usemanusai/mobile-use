@@ -1,6 +1,7 @@
 import asyncio
 import json
-from typing import Any, AsyncGenerator
+from typing import Any
+from collections.abc import AsyncGenerator
 
 
 class EventBroadcaster:
@@ -26,7 +27,7 @@ class EventBroadcaster:
             self._subscribers.add(q)
         try:
             # Send a hello event
-            await q.put("data: {\"type\": \"hello\"}\n\n")
+            await q.put('data: {"type": "hello"}\n\n')
             while True:
                 data = await q.get()
                 yield data.encode("utf-8")
@@ -36,4 +37,3 @@ class EventBroadcaster:
 
 
 broadcaster = EventBroadcaster()
-

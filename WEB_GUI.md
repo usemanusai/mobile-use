@@ -50,4 +50,3 @@ The script will:
 - If the browser opens before the server is ready, the page will connect automatically a few seconds later.
 - Ensure port 8086 is free on your host, or set `WEB_GUI_PORT` in `.env` and re-run.
 - If no device is found, the agent will fail to initialize when you send the first task.
-

@@ -28,9 +28,11 @@ def get_launch_app_tool(ctx: MobileUseContext):
         has_failed = output is not None
         tool_message = ToolMessage(
             tool_call_id=tool_call_id,
-            content=launch_app_wrapper.on_failure_fn(package_name)
-            if has_failed
-            else launch_app_wrapper.on_success_fn(package_name),
+            content=(
+                launch_app_wrapper.on_failure_fn(package_name)
+                if has_failed
+                else launch_app_wrapper.on_success_fn(package_name)
+            ),
             additional_kwargs={"error": output} if has_failed else {},
             status="error" if has_failed else "success",
         )

@@ -33,9 +33,9 @@ class ContextorNode:
         return state.sanitize_update(
             ctx=self.ctx,
             update={
-                "latest_screenshot_base64": device_data.base64
-                if should_add_screenshot_context
-                else None,
+                "latest_screenshot_base64": (
+                    device_data.base64 if should_add_screenshot_context else None
+                ),
                 "latest_ui_hierarchy": device_data.elements,
                 "focused_app_info": focused_app_info,
                 "screen_size": (device_data.width, device_data.height),

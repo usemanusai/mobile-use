@@ -29,9 +29,11 @@ def get_tap_tool(ctx: MobileUseContext):
         has_failed = output is not None
         tool_message = ToolMessage(
             tool_call_id=tool_call_id,
-            content=tap_wrapper.on_failure_fn(selector_request, index)
-            if has_failed
-            else tap_wrapper.on_success_fn(selector_request, index),
+            content=(
+                tap_wrapper.on_failure_fn(selector_request, index)
+                if has_failed
+                else tap_wrapper.on_success_fn(selector_request, index)
+            ),
             additional_kwargs={"error": output} if has_failed else {},
             status="error" if has_failed else "success",
         )
@@ -52,11 +54,9 @@ def get_tap_tool(ctx: MobileUseContext):
 tap_wrapper = ToolWrapper(
     tool_fn_getter=get_tap_tool,
     on_success_fn=(
-        lambda selector_request,
-        index: f"Tap on {selector_request} {'at index {index}' if index else ''} is successful."
+        lambda selector_request, index: f"Tap on {selector_request} {'at index {index}' if index else ''} is successful."
     ),
     on_failure_fn=(
-        lambda selector_request,
-        index: f"Failed to tap on {selector_request} {'at index {index}' if index else ''}."
+        lambda selector_request, index: f"Failed to tap on {selector_request} {'at index {index}' if index else ''}."
     ),
 )

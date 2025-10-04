@@ -31,9 +31,9 @@ async def outputter(
         agents_thoughts=graph_output.agents_thoughts,
         structured_output=output_config.structured_output,
         output_description=output_config.output_description,
-        last_ai_message=last_message.content
-        if last_message and is_ai_message(message=last_message)
-        else None,
+        last_ai_message=(
+            last_message.content if last_message and is_ai_message(message=last_message) else None
+        ),
     )
 
     messages: list[BaseMessage] = [

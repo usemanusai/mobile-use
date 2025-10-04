@@ -57,7 +57,7 @@ while true; do
 
     "${EXECUTABLE[@]}" 2>&1 | while IFS= read -r line; do
         echo "$line"
-    
+
         if is_exception "$line"; then
             echo "Exception detected: $line"
             pids=$(pgrep -f "maestro")
@@ -65,7 +65,7 @@ while true; do
                 echo "Killing process(es): $pids"
                 kill $pids
             fi
-      
+
         break
         fi
     done

@@ -7,4 +7,3 @@ Write-Host ""
 powershell.exe -ExecutionPolicy Bypass -File mobile-use.ps1 `
   "Open Gmail, find first 3 unread emails, and list their sender and subject line" `
   --output-description "A JSON list of objects, each with 'sender' and 'subject' keys"
-

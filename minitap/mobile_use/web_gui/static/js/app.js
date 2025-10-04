@@ -127,4 +127,3 @@ toggleAdvanced.addEventListener('click', ()=>{
 restore();
 connectSSE();
 fetch('/api/status').then(r=>r.json()).then(j=>setStatus(j.status||''));
-

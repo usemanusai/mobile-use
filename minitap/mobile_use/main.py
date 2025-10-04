@@ -120,8 +120,7 @@ def main(
 @app.command()
 def serve(
     port: Annotated[
-        int,
-        typer.Option("--port", "-P", help="Port to run the Web GUI on (inside container)")
+        int, typer.Option("--port", "-P", help="Port to run the Web GUI on (inside container)")
     ] = int(os.getenv("WEB_GUI_PORT", "8086")),
 ):
     """Start the Web GUI server (FastAPI) and wait indefinitely."""

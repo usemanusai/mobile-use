@@ -14,12 +14,12 @@
 #### 2. Maestro Analytics Prompt Removal
 - **Issue**: Maestro CLI prompted for analytics consent on every run, requiring manual input
 - **Error**: `[Maestro Studio]: Enable analytics? [Y/n]`
-- **Solution**: 
+- **Solution**:
   - Added environment variables `MAESTRO_DISABLE_ANALYTICS=true` and `MAESTRO_CLI_NO_ANALYTICS=1` to subprocess environment
   - Added stdout filtering to suppress analytics messages
   - Updated `.env` file with analytics disable flags
 - **Impact**: No more manual intervention required during startup
-- **Files Changed**: 
+- **Files Changed**:
   - `minitap/mobile_use/servers/device_hardware_bridge.py`
   - `.env`
 
@@ -72,7 +72,7 @@ for attempt in range(max_retries):
     except Exception as e:
         last_error = e
         logger.warning(f"Agent LLM call failed (attempt {attempt + 1}/{max_retries}): {e}")
-        
+
         if attempt < max_retries - 1:
             wait_time = retry_delay * (2 ** attempt)  # Exponential backoff
             logger.info(f"Retrying in {wait_time} seconds...")
@@ -94,15 +94,15 @@ def get_openrouter_llm(model_name: str, temperature: float = 1):
         api_key=settings.OPEN_ROUTER_API_KEY,
         base_url="https://openrouter.ai/api/v1",
     )
-    
+
     # Monkey-patch to use json_object instead of json_schema
     original_with_structured_output = client.with_structured_output
-    
+
     def patched_with_structured_output(schema, **kwargs):
         kwargs['method'] = 'json_mode'
         kwargs['include_raw'] = False
         return original_with_structured_output(schema, **kwargs)
-    
+
     client.with_structured_output = patched_with_structured_output
     return client
 ```
@@ -185,4 +185,3 @@ All changes have been tested with:
 ---
 
 **Note**: This changelog follows [Keep a Changelog](https://keepachangelog.com/) format.
-

@@ -202,4 +202,3 @@ See `CHANGELOG.md` for full details.
 ---
 
 **Ready to start?** Run `test-setup.ps1` first, then try a simple task!
-

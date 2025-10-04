@@ -127,7 +127,7 @@ powershell.exe -ExecutionPolicy Bypass -File rebuild-docker.ps1
 ## 🎓 Understanding the Architecture
 
 ```
-mobile-use.ps1 
+mobile-use.ps1
     ↓
 Docker Compose
     ↓
@@ -164,4 +164,3 @@ powershell.exe -ExecutionPolicy Bypass -File example-task.ps1
 ---
 
 **For detailed information, see `FINAL_SUMMARY.md`**
-

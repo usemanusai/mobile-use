@@ -45,7 +45,7 @@ powershell.exe -ExecutionPolicy Bypass -File rebuild-docker.ps1
 - No more manual prompts
 
 ### Fix 3: Retry Logic ✅
-**Files:** 
+**Files:**
 - `minitap/mobile_use/agents/planner/planner.py`
 - `minitap/mobile_use/agents/orchestrator/orchestrator.py`
 - `minitap/mobile_use/agents/cortex/cortex.py`
@@ -117,7 +117,7 @@ Get-Content ./output/events.json
 
 The mobile-use system architecture:
 ```
-mobile-use.ps1 
+mobile-use.ps1
     ↓
 docker-compose run mobile-use-full-ip
     ↓
@@ -256,4 +256,3 @@ If you still see errors:
 **The system is now ready to use with all fixes applied!** 🎊
 
 Run `rebuild-docker.ps1` first, then test with your Gmail task.
-

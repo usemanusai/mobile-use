@@ -6,4 +6,3 @@ Concise guides for specific tasks.
 - Use the Web GUI persistent loop mode
 - Create custom prompts and agent configurations
 - Run CI locally with pre-commit and pytest
-

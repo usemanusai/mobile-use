@@ -51,13 +51,17 @@ class CortexNode:
         messages = [
             SystemMessage(content=system_message),
             HumanMessage(
-                content="Here are my device info:\n"
-                + self.ctx.device.to_str()
-                + f"Device date: {state.device_date}\n"
-                if state.device_date
-                else "" + f"Focused app info: {state.focused_app_info}\n"
-                if state.focused_app_info
-                else ""
+                content=(
+                    "Here are my device info:\n"
+                    + self.ctx.device.to_str()
+                    + f"Device date: {state.device_date}\n"
+                    if state.device_date
+                    else (
+                        "" + f"Focused app info: {state.focused_app_info}\n"
+                        if state.focused_app_info
+                        else ""
+                    )
+                )
             ),
         ]
         for thought in state.agents_thoughts:
@@ -94,10 +98,12 @@ class CortexNode:
             except Exception as e:
                 last_error = e
                 error_msg = str(e)
-                logger.warning(f"Cortex LLM call failed (attempt {attempt + 1}/{max_retries}): {error_msg}")
+                logger.warning(
+                    f"Cortex LLM call failed (attempt {attempt + 1}/{max_retries}): {error_msg}"
+                )
 
                 if attempt < max_retries - 1:
-                    wait_time = retry_delay * (2 ** attempt)
+                    wait_time = retry_delay * (2**attempt)
                     logger.info(f"Retrying in {wait_time} seconds...")
                     await asyncio.sleep(wait_time)
                 else:

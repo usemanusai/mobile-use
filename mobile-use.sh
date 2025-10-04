@@ -98,7 +98,7 @@ if [ ${#tcp_devices[@]} -gt 0 ]; then
 else
     # If no TCP/IP devices found, get IP and connect
     echo "No device in TCP/IP mode, enabling..."
-    
+
     selected_device_serial="$(select_usb_device)"
     echo "Choosing device: $selected_device_serial"
 
@@ -124,7 +124,7 @@ else
             fi
         done
     fi
-    
+
     if [ -z "$device_ip_only" ]; then
         echo "Error: Could not get device IP. Is a device connected via USB and on the same Wi-Fi network?" >&2
         exit 1

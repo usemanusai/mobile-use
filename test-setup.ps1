@@ -78,4 +78,3 @@ Write-Host "To run a task:" -ForegroundColor White
 Write-Host "  powershell.exe -ExecutionPolicy Bypass -File mobile-use.ps1 'Your task here'" -ForegroundColor Green
 Write-Host ""
 Write-Host "See SETUP_GUIDE.md for more information" -ForegroundColor Cyan
-

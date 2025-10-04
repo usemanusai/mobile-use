@@ -274,7 +274,9 @@ class Agent:
         try:
             logger.info(f"[{task_name}] Invoking graph with input: {graph_input}")
             task.status = TaskStatus.RUNNING
-            await broadcaster.publish({"type": "task_start", "task_id": task.id, "goal": request.goal})
+            await broadcaster.publish(
+                {"type": "task_start", "task_id": task.id, "goal": request.goal}
+            )
             async for chunk in (await get_graph(context)).astream(
                 input=graph_input,
                 config={
@@ -288,10 +290,12 @@ class Agent:
                     last_state_snapshot = payload  # type: ignore
                     last_state = State(**last_state_snapshot)  # type: ignore
                     try:
-                        await broadcaster.publish({
-                            "type": "state",
-                            "remaining_steps": getattr(last_state, "remaining_steps", None),
-                        })
+                        await broadcaster.publish(
+                            {
+                                "type": "state",
+                                "remaining_steps": getattr(last_state, "remaining_steps", None),
+                            }
+                        )
                     except Exception:
                         pass
                     if task.request.thoughts_output_path:
@@ -314,7 +318,9 @@ class Agent:
                                     agent_thought=last_item,
                                 )
                                 try:
-                                    await broadcaster.publish({"type": "agent_thought", "data": last_item})
+                                    await broadcaster.publish(
+                                        {"type": "agent_thought", "data": last_item}
+                                    )
                                 except Exception:
                                     pass
 
