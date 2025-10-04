@@ -1,6 +1,7 @@
 [CmdletBinding(PositionalBinding=$false)]
 param (
     [string]$Interface = "",
+    [switch]$SkipDevice,
     [Parameter(ValueFromRemainingArguments)]
     [string[]]$RemainingArgs
 )
@@ -73,6 +74,12 @@ function Is-EmulatorDevice {
 }
 
 
+# Optional: skip device detection entirely
+if ($SkipDevice -or $env:ALLOW_NO_DEVICE -eq '1') {
+    Write-Warning "Skipping device detection. Starting GUI/services without a connected device."
+    $device_ip = $null
+}
+else {
 # Find devices connected via TCP/IP
 $tcp_devices = @(
     [regex]::Matches(
@@ -143,6 +150,9 @@ if ($tcp_devices) {
     adb -s $selected_device_serial tcpip 5555
     $device_ip = "${device_ip_only}:5555"
 }
+
+}
+
 
 Write-Output "Device IP is: $device_ip"
 $env:ADB_CONNECT_ADDR = "$device_ip"

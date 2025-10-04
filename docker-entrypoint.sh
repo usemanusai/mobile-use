@@ -2,6 +2,13 @@
 
 set -eu
 
+
+# Allow running without a connected device (for GUI-only workflows)
+if [[ "${ALLOW_NO_DEVICE:-}" = "1" ]] || [[ -z "${ADB_CONNECT_ADDR:-}" ]]; then
+    echo "Starting without waiting for device (ALLOW_NO_DEVICE=${ALLOW_NO_DEVICE:-0}, ADB_CONNECT_ADDR='${ADB_CONNECT_ADDR:-}')"
+    exec mobile-use "$@"
+fi
+
 while true; do
     set +e
     adb connect "$ADB_CONNECT_ADDR"
