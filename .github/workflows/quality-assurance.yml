@@ -41,7 +41,7 @@ jobs:
           uv sync --all-extras --dev --no-install-project
 
       - name: Lint (ruff)
-        run: uvx ruff --version && uvx ruff .
+        run: uvx ruff --version && uvx ruff check .
 
       - name: Format check (black)
         run: uvx black --version && uvx black --check .
