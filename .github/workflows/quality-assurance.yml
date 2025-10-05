@@ -43,8 +43,8 @@ jobs:
       - name: Lint (ruff)
         run: uvx ruff --version && uvx ruff check .
 
-      - name: Format check (black)
-        run: uvx black --version && uvx black --check .
+      - name: Format check (ruff format)
+        run: uvx ruff --version && uvx ruff format --check .
 
       - name: Run tests (pytest + coverage)
         run: |
