@@ -1,4 +1,5 @@
 import asyncio
+import os
 import sys
 import tempfile
 import time
@@ -91,6 +92,7 @@ class Agent:
         self._is_default_screen_api = (
             self._config.servers.screen_api_base_url == DEFAULT_SCREEN_API_BASE_URL
         )
+        self._deferred_device_setup: bool = False
 
     def init(
         self,
@@ -114,6 +116,13 @@ class Agent:
             device_id, platform = self._config.device_id, self._config.device_platform
 
         if not device_id or not platform:
+            if os.getenv("ALLOW_NO_DEVICE", "") == "1":
+                logger.warning(
+                    "No device found; continuing in GUI-only mode. Device will be required at task time."
+                )
+                self._deferred_device_setup = True
+                self._initialized = True
+                return True
             error_msg = "No device found. Exiting."
             logger.error(error_msg)
             raise DeviceNotFoundError(error_msg)
@@ -226,6 +235,24 @@ class Agent:
     async def _run_task(self, request: TaskRequest[TOutput]) -> str | dict | TOutput | None:
         if not self._initialized:
             raise AgentNotInitializedError()
+
+        # Complete deferred device setup if GUI-only init was used
+        if getattr(self, "_deferred_device_setup", False):
+            device_id, platform = get_first_device()
+            if not device_id or not platform:
+                raise DeviceNotFoundError(
+                    "No device connected. Please connect a device via ADB or set ADB_CONNECT_ADDR environment variable."
+                )
+            # Initialize clients and servers now that a device is present
+            self._init_clients(platform=platform, retry_count=5, retry_wait_seconds=5)
+            success = self._run_servers(device_id=device_id, platform=platform)
+            if not success:
+                raise ServerStartupError(
+                    message="Failed to start device servers after device connection."
+                )
+            self._device_context = self._get_device_context(device_id=device_id, platform=platform)
+            logger.info(self._device_context.to_str())
+            self._deferred_device_setup = False
 
         if request.profile:
             agent_profile = self._config.agent_profiles.get(request.profile)
