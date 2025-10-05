@@ -7,4 +7,4 @@ from minitap.mobile_use.sdk.builders.task_request_builder import (
     TaskRequestCommonBuilder,
 )
 
-__all__ = ["AgentConfigBuilder", "TaskRequestCommonBuilder", "TaskRequestBuilder", "Builders"]
+__all__ = ["AgentConfigBuilder", "Builders", "TaskRequestBuilder", "TaskRequestCommonBuilder"]
