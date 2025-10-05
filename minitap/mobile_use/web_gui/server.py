@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from minitap.mobile_use.web_gui.events import broadcaster
 from minitap.mobile_use.sdk.agent import Agent
 from minitap.mobile_use.sdk.builders import Builders
+from minitap.mobile_use.sdk.types.exceptions import DeviceNotFoundError
 from minitap.mobile_use.utils.logger import get_logger
 from minitap.mobile_use.config import settings
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -45,6 +46,19 @@ class AgentManager:
                     self.status = "Ready"
                     await broadcaster.publish({"type": "status", "status": self.status})
                 except Exception as e:
+                    # If no device and ALLOW_NO_DEVICE=1, allow GUI-only init
+                    if isinstance(e, DeviceNotFoundError) and os.getenv("ALLOW_NO_DEVICE", "") == "1":
+                        logger.warning("No device found; starting in GUI-only mode. Device will be required at task time.")
+                        try:
+                            # Mark agent as initialized in deferred mode
+                            setattr(self.agent, "_initialized", True)
+                            if hasattr(self.agent, "_deferred_device_setup"):
+                                setattr(self.agent, "_deferred_device_setup", True)
+                            self.status = "Ready"
+                            await broadcaster.publish({"type": "status", "status": self.status})
+                            return
+                        except Exception:
+                            pass
                     self.status = "Error"
                     await broadcaster.publish({"type": "error", "message": str(e)})
                     raise
