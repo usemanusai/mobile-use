@@ -2,9 +2,10 @@ from pathlib import Path
 
 from jinja2 import Template
 from langchain_core.messages import HumanMessage, SystemMessage
+from pydantic import BaseModel, Field
+
 from minitap.mobile_use.context import MobileUseContext
 from minitap.mobile_use.services.llm import get_llm
-from pydantic import BaseModel, Field
 
 
 class HopperOutput(BaseModel):

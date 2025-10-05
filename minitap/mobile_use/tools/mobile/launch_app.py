@@ -1,16 +1,18 @@
+from typing import Annotated
+
 from langchain_core.messages import ToolMessage
 from langchain_core.tools import tool
 from langchain_core.tools.base import InjectedToolCallId
+from langgraph.prebuilt import InjectedState
 from langgraph.types import Command
+
 from minitap.mobile_use.constants import EXECUTOR_MESSAGES_KEY
+from minitap.mobile_use.context import MobileUseContext
 from minitap.mobile_use.controllers.mobile_command_controller import (
     launch_app as launch_app_controller,
 )
-from minitap.mobile_use.tools.tool_wrapper import ToolWrapper
-from typing import Annotated
-from minitap.mobile_use.context import MobileUseContext
 from minitap.mobile_use.graph.state import State
-from langgraph.prebuilt import InjectedState
+from minitap.mobile_use.tools.tool_wrapper import ToolWrapper
 
 
 def get_launch_app_tool(ctx: MobileUseContext):

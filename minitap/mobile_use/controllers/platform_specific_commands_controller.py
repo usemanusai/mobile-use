@@ -1,11 +1,11 @@
-from datetime import date
 import json
+from datetime import date
 
 from adbutils import AdbDevice
+
+from minitap.mobile_use.context import DevicePlatform, MobileUseContext
 from minitap.mobile_use.utils.logger import MobileUseLogger
 from minitap.mobile_use.utils.shell_utils import run_shell_command_on_host
-from minitap.mobile_use.context import MobileUseContext
-from minitap.mobile_use.context import DevicePlatform
 
 
 def get_adb_device(ctx: MobileUseContext) -> AdbDevice:

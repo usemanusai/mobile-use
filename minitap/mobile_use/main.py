@@ -1,11 +1,11 @@
 import asyncio
 import os
+from typing import Annotated
 
 import typer
 from adbutils import AdbClient
 from langchain.callbacks.base import Callbacks
 from rich.console import Console
-from typing import Annotated
 
 from minitap.mobile_use.config import (
     initialize_llm_config,
@@ -26,7 +26,7 @@ async def run_automation(
     test_name: str | None = None,
     traces_output_path_str: str = "traces",
     output_description: str | None = None,
-    graph_config_callbacks: Callbacks = [],
+    graph_config_callbacks: Callbacks | None = None,
 ):
     llm_config = initialize_llm_config()
     agent_profile = AgentProfile(name="default", llm_config=llm_config)

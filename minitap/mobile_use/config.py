@@ -108,7 +108,7 @@ def validate_vertex_ai_credentials():
     except DefaultCredentialsError as e:
         raise Exception(
             f"VertexAI requires valid Google Application Default Credentials (ADC): {e}"
-        )
+        ) from e
 
 
 class LLM(BaseModel):

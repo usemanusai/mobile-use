@@ -8,6 +8,7 @@ from typing import Annotated
 
 import requests
 import typer
+
 from minitap.mobile_use.context import DevicePlatform
 from minitap.mobile_use.servers.config import server_settings
 from minitap.mobile_use.servers.device_hardware_bridge import DeviceHardwareBridge

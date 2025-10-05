@@ -108,7 +108,7 @@ class CortexNode:
                     await asyncio.sleep(wait_time)
                 else:
                     logger.error(f"Cortex failed after {max_retries} attempts")
-                    raise last_error
+                    raise last_error from None
 
         is_subgoal_completed = (
             response.complete_subgoals_by_ids is not None

@@ -13,7 +13,9 @@ Run:
 
 import asyncio
 from datetime import date, timedelta
+
 from pydantic import BaseModel, Field
+
 from minitap.mobile_use.sdk import Agent
 
 

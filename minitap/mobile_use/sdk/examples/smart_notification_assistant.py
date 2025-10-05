@@ -22,6 +22,7 @@ from datetime import datetime
 from enum import Enum
 
 from pydantic import BaseModel, Field
+
 from minitap.mobile_use.config import LLM, LLMConfig, LLMConfigUtils, LLMWithFallback
 from minitap.mobile_use.sdk import Agent
 from minitap.mobile_use.sdk.builders import Builders

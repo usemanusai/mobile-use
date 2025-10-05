@@ -163,9 +163,9 @@ def _on_input_success(text, text_input_content, text_input_resource_id):
     """Success message handler for input text operations."""
     if text_input_resource_id is not None:
         return (
-            f"Typed {repr(text)}.\n"
-            f"Here is the whole content of input with id {repr(text_input_resource_id)}: "
-            f"{repr(text_input_content)}"
+            f"Typed {text!r}.\n"
+            f"Here is the whole content of input with id {text_input_resource_id!r}: "
+            f"{text_input_content!r}"
         )
     else:
         return "Typed text, should now verify before moving forward"
@@ -174,5 +174,5 @@ def _on_input_success(text, text_input_content, text_input_resource_id):
 input_text_wrapper = ToolWrapper(
     tool_fn_getter=get_input_text_tool,
     on_success_fn=_on_input_success,
-    on_failure_fn=lambda text, error: f"Failed to input text {repr(text)}. Reason: {error}",
+    on_failure_fn=lambda text, error: f"Failed to input text {text!r}. Reason: {error}",
 )

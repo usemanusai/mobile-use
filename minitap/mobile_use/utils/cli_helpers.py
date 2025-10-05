@@ -1,8 +1,9 @@
 import sys
 
-from minitap.mobile_use.clients.ios_client import get_ios_devices
 from adbutils import AdbClient
 from rich.console import Console
+
+from minitap.mobile_use.clients.ios_client import get_ios_devices
 
 
 def display_device_status(console: Console, adb_client: AdbClient | None = None):

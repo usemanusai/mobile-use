@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 from shutil import which
 from types import NoneType
-from typing import TypeVar, overload
+from typing import ClassVar, TypeVar, overload
 
 from adbutils import AdbClient
 from langchain_core.messages import AIMessage
@@ -32,8 +32,6 @@ from minitap.mobile_use.controllers.platform_specific_commands_controller import
 from minitap.mobile_use.graph.graph import get_graph
 from minitap.mobile_use.graph.state import State
 from minitap.mobile_use.sdk.builders.agent_config_builder import get_default_agent_config
-from minitap.mobile_use.web_gui.events import broadcaster
-
 from minitap.mobile_use.sdk.builders.task_request_builder import TaskRequestBuilder
 from minitap.mobile_use.sdk.constants import (
     DEFAULT_HW_BRIDGE_BASE_URL,
@@ -63,6 +61,7 @@ from minitap.mobile_use.utils.media import (
     remove_steps_json_from_trace_folder,
 )
 from minitap.mobile_use.utils.recorder import log_agent_thought
+from minitap.mobile_use.web_gui.events import broadcaster
 
 logger = get_logger(__name__)
 
@@ -71,7 +70,7 @@ TOutput = TypeVar("TOutput", bound=BaseModel | None)
 
 class Agent:
     _config: AgentConfig
-    _tasks: list[Task] = []
+    _tasks: ClassVar[list[Task]] = []
     _tmp_traces_dir: Path
     _initialized: bool = False
     _is_default_screen_api: bool
@@ -600,7 +599,7 @@ def _validate_and_prepare_file(file_path: Path):
         path_obj.parent.mkdir(parents=True, exist_ok=True)
         path_obj.touch(exist_ok=True)
     except OSError as e:
-        raise AgentTaskRequestError(f"Error creating file '{file_path}': {e}")
+        raise AgentTaskRequestError(f"Error creating file '{file_path}': {e}") from e
 
 
 def print_ai_response_to_stderr(graph_result: State):

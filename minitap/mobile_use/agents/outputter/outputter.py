@@ -3,13 +3,14 @@ from pathlib import Path
 
 from jinja2 import Template
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
+from pydantic import BaseModel
+
 from minitap.mobile_use.config import OutputConfig
 from minitap.mobile_use.context import MobileUseContext
 from minitap.mobile_use.graph.state import State
 from minitap.mobile_use.services.llm import get_llm
 from minitap.mobile_use.utils.conversations import is_ai_message
 from minitap.mobile_use.utils.logger import get_logger
-from pydantic import BaseModel
 
 logger = get_logger(__name__)
 

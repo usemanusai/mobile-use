@@ -72,7 +72,7 @@ class PlannerNode:
                     await asyncio.sleep(wait_time)
                 else:
                     logger.error(f"Planner failed after {max_retries} attempts")
-                    raise last_error
+                    raise last_error from None
 
         subgoals_plan = [
             Subgoal(

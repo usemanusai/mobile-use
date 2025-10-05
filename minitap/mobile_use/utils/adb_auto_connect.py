@@ -3,7 +3,7 @@ import re
 import shlex
 import subprocess
 import time
-from typing import Iterable, List, Optional, Tuple
+from collections.abc import Iterable
 
 from minitap.mobile_use.utils.logger import get_logger
 
@@ -27,12 +27,11 @@ class ADBError(Exception):
     pass
 
 
-def _run(cmd: str, timeout: int = 30, check: bool = False) -> Tuple[int, str, str]:
+def _run(cmd: str, timeout: int = 30, check: bool = False) -> tuple[int, str, str]:
     logger.debug(f"$ {cmd}")
     proc = subprocess.run(
         shlex.split(cmd),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        capture_output=True,
         timeout=timeout,
         text=True,
     )
@@ -43,12 +42,12 @@ def _run(cmd: str, timeout: int = 30, check: bool = False) -> Tuple[int, str, st
     return proc.returncode, out, err
 
 
-def _devices() -> List[str]:
+def _devices() -> list[str]:
     rc, out, _ = _run("adb devices -l")
     if rc != 0:
         return []
     lines = [ln.strip() for ln in out.splitlines() if ln.strip()]
-    devs: List[str] = []
+    devs: list[str] = []
     for ln in lines[1:]:  # skip header
         parts = ln.split()
         if len(parts) >= 2 and parts[1] == "device":
@@ -56,12 +55,12 @@ def _devices() -> List[str]:
     return devs
 
 
-def _mdns_services() -> List[Tuple[str, int]]:
+def _mdns_services() -> list[tuple[str, int]]:
     """Return list of (host, port) from `adb mdns services` for connectable services."""
     rc, out, _ = _run("adb mdns services")
     if rc != 0:
         return []
-    hosts: List[Tuple[str, int]] = []
+    hosts: list[tuple[str, int]] = []
     for ln in out.splitlines():
         # Example: adb-tls-connect _adb-tls-connect._tcp. local. 192.168.1.50:41857
         if "adb-tls-connect" in ln or "_adb._tcp" in ln:
@@ -71,7 +70,7 @@ def _mdns_services() -> List[Tuple[str, int]]:
     return hosts
 
 
-def _get_device_ip_via_shell() -> Optional[str]:
+def _get_device_ip_via_shell() -> str | None:
     """Try to infer device WLAN IP while USB-connected."""
     # Try common commands
     for cmd in (
@@ -99,7 +98,7 @@ def _sleep_backoff(attempt: int):
     time.sleep(delay)
 
 
-def _connect_targets(targets: Iterable[Tuple[str, int]]) -> Optional[str]:
+def _connect_targets(targets: Iterable[tuple[str, int]]) -> str | None:
     for host, port in targets:
         addr = f"{host}:{port}"
         logger.info(f"Attempting: adb connect {addr}")
@@ -111,11 +110,11 @@ def _connect_targets(targets: Iterable[Tuple[str, int]]) -> Optional[str]:
     return None
 
 
-def try_env_connect() -> Optional[str]:
+def try_env_connect() -> str | None:
     if not ENV_CONNECT_ADDR:
         return None
     # allow comma-separated list
-    addrs = [a.strip() for a in ENV_CONNECT_ADDR.split(',') if a.strip()]
+    addrs = [a.strip() for a in ENV_CONNECT_ADDR.split(",") if a.strip()]
     targets = []
     for a in addrs:
         if ":" in a:
@@ -130,7 +129,7 @@ def try_env_connect() -> Optional[str]:
     return _connect_targets(targets)
 
 
-def try_mdns_connect() -> Optional[str]:
+def try_mdns_connect() -> str | None:
     hosts = _mdns_services()
     if not hosts:
         logger.info("No mDNS adb-tls-connect services discovered")
@@ -138,7 +137,7 @@ def try_mdns_connect() -> Optional[str]:
     return _connect_targets(hosts)
 
 
-def try_usb_tcpip_then_connect() -> Optional[str]:
+def try_usb_tcpip_then_connect() -> str | None:
     # Check if any USB device is present
     devs = _devices()
     if not devs:
@@ -157,7 +156,7 @@ def try_usb_tcpip_then_connect() -> Optional[str]:
     return _connect_targets([(ip, ENV_TCP_PORT)])
 
 
-def try_pairing_then_connect() -> Optional[str]:
+def try_pairing_then_connect() -> str | None:
     """Wireless debugging pairing flow (Android 11+).
     Requires user-provided ADB_PAIR_HOST_PORT and ADB_PAIR_CODE from device.
     """
@@ -174,7 +173,7 @@ def try_pairing_then_connect() -> Optional[str]:
     return try_mdns_connect() or try_env_connect()
 
 
-def attempt_auto_connect() -> Optional[str]:
+def attempt_auto_connect() -> str | None:
     """Try to establish ADB TCP/IP connection using multiple non-root methods.
 
     Returns the connected address (host:port) on success, or None if all methods failed.

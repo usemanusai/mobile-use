@@ -1,7 +1,7 @@
 import asyncio
 import json
-from typing import Any
 from collections.abc import AsyncGenerator
+from typing import Any
 
 
 class EventBroadcaster:

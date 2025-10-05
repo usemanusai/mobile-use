@@ -6,11 +6,11 @@ Uses ContextVar to avoid prop drilling and maintain clean function signatures.
 
 from enum import Enum
 from pathlib import Path
+from typing import Literal
 
 from adbutils import AdbClient
 from openai import BaseModel
 from pydantic import ConfigDict
-from typing import Literal
 
 from minitap.mobile_use.clients.device_hardware_client import DeviceHardwareClient
 from minitap.mobile_use.clients.screen_api_client import ScreenApiClient

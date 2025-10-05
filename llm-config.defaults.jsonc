@@ -2,34 +2,34 @@
 {
   "default": {
     "planner": {
-      "provider": "openai",
-      "model": "gpt-5-nano"
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-chat-v3.1:free"
     },
     "orchestrator": {
-      "provider": "openai",
-      "model": "gpt-5-nano"
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-chat-v3.1:free"
     },
     "cortex": {
-      "provider": "openai",
-      "model": "gpt-5",
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-chat-v3.1:free",
       "fallback": {
-        "provider": "openai",
-        "model": "gpt-5"
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat-v3.1:free"
       }
     },
     "executor": {
-      "provider": "openai",
-      "model": "gpt-5-nano"
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-chat-v3.1:free"
     },
     "utils": {
       "hopper": {
         // Needs at least a 256k context window.
-        "provider": "openai",
-        "model": "gpt-4.1"
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat-v3.1:free"
       },
       "outputter": {
-        "provider": "openai",
-        "model": "gpt-5-nano"
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat-v3.1:free"
       }
     }
   },
@@ -38,33 +38,33 @@
   "recommended": {
     "planner": {
       "provider": "openrouter",
-      "model": "meta-llama/llama-4-scout"
+      "model": "deepseek/deepseek-chat-v3.1:free"
     },
     "orchestrator": {
       "provider": "openrouter",
-      "model": "openai/gpt-oss-120b"
+      "model": "deepseek/deepseek-chat-v3.1:free"
     },
     "cortex": {
-      "provider": "google",
-      "model": "gemini-2.5-flash",
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-chat-v3.1:free",
       "fallback": {
-        "provider": "openai",
-        "model": "gpt-5"
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat-v3.1:free"
       }
     },
     "executor": {
-      "provider": "openai",
-      "model": "gpt-5-nano"
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-chat-v3.1:free"
     },
     "utils": {
       "hopper": {
         // Needs at least a 256k context window.
-        "provider": "openai",
-        "model": "gpt-4.1"
+        "provider": "openrouter",
+        "model": "qwen/qwen3-coder:free"
       },
       "outputter": {
-        "provider": "openai",
-        "model": "gpt-5-nano"
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat-v3.1:free"
       }
     }
   }

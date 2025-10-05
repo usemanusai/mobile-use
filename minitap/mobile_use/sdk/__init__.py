@@ -4,7 +4,7 @@ Mobile-use SDK for running mobile automation tasks.
 This package provides APIs for interacting with mobile devices and executing tasks.
 """
 
-from minitap.mobile_use.sdk import types, builders
+from minitap.mobile_use.sdk import builders, types
 from minitap.mobile_use.sdk.agent import Agent
 
 __all__ = ["Agent"]

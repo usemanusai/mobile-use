@@ -3,6 +3,7 @@ import time
 from urllib.parse import urljoin
 
 import requests
+
 from minitap.mobile_use.utils.logger import get_logger
 from minitap.mobile_use.utils.requests_utils import get_session_with_curl_logging
 

@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
+from pydantic_settings import BaseSettings
+
 from minitap.mobile_use.servers.device_hardware_bridge import DEVICE_HARDWARE_BRIDGE_PORT
 from minitap.mobile_use.utils.logger import get_logger
-from pydantic_settings import BaseSettings
 
 load_dotenv(verbose=True)
 logger = get_logger(__name__)

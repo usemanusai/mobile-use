@@ -11,7 +11,6 @@ from minitap.mobile_use.constants import RECURSION_LIMIT
 from minitap.mobile_use.sdk.types.agent import AgentProfile
 from minitap.mobile_use.sdk.types.task import TaskRequest, TaskRequestCommon
 
-
 TIn = TypeVar("TIn", bound=BaseModel | None)
 TOut = TypeVar("TOut", bound=BaseModel)
 

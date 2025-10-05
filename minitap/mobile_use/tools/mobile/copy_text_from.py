@@ -23,9 +23,7 @@ def get_copy_text_from_tool(ctx: MobileUseContext):
         tool_call_id: Annotated[str, InjectedToolCallId],
         state: Annotated[State, InjectedState],
         agent_thought: str,
-        selector_request: SelectorRequest = Field(
-            ..., description="The selector to copy text from"
-        ),
+        selector_request: Annotated[SelectorRequest, Field(..., description="The selector to copy text from")] = ...,
     ):
         """
         Copies text from a UI element identified by the given selector and stores it in memory.
