@@ -16,6 +16,8 @@ jobs:
   build-and-verify:
     name: build-and-verify (lint, test, build)
     runs-on: ubuntu-latest
+    env:
+      UV_NO_PROJECT: "1"  # prevent uv from trying to build/install the project for tool runs
     strategy:
       fail-fast: false
       matrix:
