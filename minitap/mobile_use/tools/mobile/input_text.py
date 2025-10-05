@@ -19,7 +19,10 @@ from minitap.mobile_use.controllers.mobile_command_controller import (
 )
 from minitap.mobile_use.graph.state import State
 from minitap.mobile_use.tools.tool_wrapper import ToolWrapper
-from minitap.mobile_use.tools.utils import focus_element_if_needed, move_cursor_to_end_if_bounds
+from minitap.mobile_use.tools.utils import (
+    focus_element_if_needed,
+    move_cursor_to_end_if_bounds,
+)
 from minitap.mobile_use.utils.logger import get_logger
 from minitap.mobile_use.utils.ui_hierarchy import (
     ElementBounds,
@@ -120,7 +123,8 @@ def get_input_text_tool(ctx: MobileUseContext):
                 state.latest_ui_hierarchy = screen_data.elements
 
                 element = find_element_by_resource_id(
-                    ui_hierarchy=state.latest_ui_hierarchy, resource_id=text_input_resource_id
+                    ui_hierarchy=state.latest_ui_hierarchy,
+                    resource_id=text_input_resource_id,
                 )
 
                 if not element:

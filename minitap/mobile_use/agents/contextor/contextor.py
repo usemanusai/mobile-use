@@ -1,4 +1,6 @@
-from minitap.mobile_use.agents.executor.utils import is_last_tool_message_take_screenshot
+from minitap.mobile_use.agents.executor.utils import (
+    is_last_tool_message_take_screenshot,
+)
 from minitap.mobile_use.context import MobileUseContext
 from minitap.mobile_use.controllers.mobile_command_controller import get_screen_data
 from minitap.mobile_use.controllers.platform_specific_commands_controller import (

@@ -13,7 +13,12 @@ from minitap.mobile_use.sdk.constants import (
     DEFAULT_PROFILE_NAME,
     DEFAULT_SCREEN_API_BASE_URL,
 )
-from minitap.mobile_use.sdk.types.agent import AgentConfig, AgentProfile, ApiBaseUrl, ServerConfig
+from minitap.mobile_use.sdk.types.agent import (
+    AgentConfig,
+    AgentProfile,
+    ApiBaseUrl,
+    ServerConfig,
+)
 from minitap.mobile_use.sdk.types.task import TaskRequestCommon
 
 

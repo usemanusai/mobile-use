@@ -59,7 +59,10 @@ def test_find_element_by_resource_id_rich_hierarchy():
         {
             "attributes": {"resource-id": "com.example:id/container"},
             "children": [
-                {"attributes": {"resource-id": "com.example:id/nested_button"}, "children": []}
+                {
+                    "attributes": {"resource-id": "com.example:id/nested_button"},
+                    "children": [],
+                }
             ],
         },
     ]

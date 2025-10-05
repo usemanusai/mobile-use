@@ -125,7 +125,9 @@ def focus_element_if_needed(
     elt_from_id = None
     if input_resource_id:
         elt_from_id = find_element_by_resource_id(
-            ui_hierarchy=rich_hierarchy, resource_id=input_resource_id, is_rich_hierarchy=True
+            ui_hierarchy=rich_hierarchy,
+            resource_id=input_resource_id,
+            is_rich_hierarchy=True,
         )
 
     if elt_from_id and input_text:

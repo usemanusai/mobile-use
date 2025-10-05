@@ -47,8 +47,13 @@ class AgentManager:
                     await broadcaster.publish({"type": "status", "status": self.status})
                 except Exception as e:
                     # If no device and ALLOW_NO_DEVICE=1, allow GUI-only init
-                    if isinstance(e, DeviceNotFoundError) and os.getenv("ALLOW_NO_DEVICE", "") == "1":
-                        logger.warning("No device found; starting in GUI-only mode. Device will be required at task time.")
+                    if (
+                        isinstance(e, DeviceNotFoundError)
+                        and os.getenv("ALLOW_NO_DEVICE", "") == "1"
+                    ):
+                        logger.warning(
+                            "No device found; starting in GUI-only mode. Device will be required at task time."
+                        )
                         try:
                             # Mark agent as initialized in deferred mode
                             self.agent._initialized = True
@@ -139,7 +144,9 @@ async def on_startup():
         try:
             await manager.start()
         except Exception as e:
-            logger.error(f"Agent auto-start failed: {e}. Server will stay up; submit a task to retry.")
+            logger.error(
+                f"Agent auto-start failed: {e}. Server will stay up; submit a task to retry."
+            )
             manager.status = "Error"
             await broadcaster.publish({"type": "error", "message": str(e)})
             await broadcaster.publish({"type": "status", "status": manager.status})
@@ -230,7 +237,10 @@ async def api_enhance(req: Request):
             temperature=0.2,
         )
         msg = llm.invoke(
-            [SystemMessage(content=sys_prompt), HumanMessage(content=f"Original task: {text}")]
+            [
+                SystemMessage(content=sys_prompt),
+                HumanMessage(content=f"Original task: {text}"),
+            ]
         )
         enhanced = msg.content if isinstance(msg.content, str) else str(msg.content)
         return {"ok": True, "enhanced": enhanced}

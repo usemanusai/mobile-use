@@ -17,7 +17,10 @@ from minitap.mobile_use.agents.planner.utils import get_current_subgoal
 from minitap.mobile_use.constants import EXECUTOR_MESSAGES_KEY
 from minitap.mobile_use.context import MobileUseContext
 from minitap.mobile_use.graph.state import State
-from minitap.mobile_use.services.llm import get_llm_with_structured_output, with_fallback
+from minitap.mobile_use.services.llm import (
+    get_llm_with_structured_output,
+    with_fallback,
+)
 from minitap.mobile_use.tools.index import EXECUTOR_WRAPPERS_TOOLS, format_tools_list
 from minitap.mobile_use.utils.conversations import get_screenshot_message_for_llm
 from minitap.mobile_use.utils.decorators import wrap_with_callbacks
@@ -80,7 +83,11 @@ class CortexNode:
             ctx=self.ctx, name="cortex", schema=CortexOutput, temperature=1
         )
         llm_fallback = get_llm_with_structured_output(
-            ctx=self.ctx, name="cortex", schema=CortexOutput, use_fallback=True, temperature=1
+            ctx=self.ctx,
+            name="cortex",
+            schema=CortexOutput,
+            use_fallback=True,
+            temperature=1,
         )
 
         # Retry logic with fallback for LLM errors
@@ -122,7 +129,7 @@ class CortexNode:
             ctx=self.ctx,
             update={
                 "agents_thoughts": [response.agent_thought],
-                "structured_decisions": response.decisions if not is_subgoal_completed else None,
+                "structured_decisions": (response.decisions if not is_subgoal_completed else None),
                 "complete_subgoals_by_ids": response.complete_subgoals_by_ids or [],
                 "latest_screenshot_base64": None,
                 "latest_ui_hierarchy": None,

@@ -17,7 +17,9 @@ from minitap.mobile_use.controllers.mobile_command_controller import (
     SwipeStartEndCoordinatesRequest,
     SwipeStartEndPercentagesRequest,
 )
-from minitap.mobile_use.controllers.mobile_command_controller import swipe as swipe_controller
+from minitap.mobile_use.controllers.mobile_command_controller import (
+    swipe as swipe_controller,
+)
 from minitap.mobile_use.graph.state import State
 from minitap.mobile_use.tools.tool_wrapper import CompositeToolWrapper
 
@@ -35,7 +37,9 @@ def get_swipe_tool(ctx: MobileUseContext) -> BaseTool:
         has_failed = output is not None
         tool_message = ToolMessage(
             tool_call_id=tool_call_id,
-            content=swipe_wrapper.on_failure_fn() if has_failed else swipe_wrapper.on_success_fn(),
+            content=(
+                swipe_wrapper.on_failure_fn() if has_failed else swipe_wrapper.on_success_fn()
+            ),
             additional_kwargs={"error": output} if has_failed else {},
             status="error" if has_failed else "success",
         )

@@ -284,7 +284,7 @@ def get_clear_text_tool(ctx: MobileUseContext):
         tool_message = ToolMessage(
             tool_call_id=tool_call_id,
             content=content,
-            additional_kwargs={"error": result.error_message} if not result.success else {},
+            additional_kwargs=({"error": result.error_message} if not result.success else {}),
             status="error" if not result.success else "success",
         )
 

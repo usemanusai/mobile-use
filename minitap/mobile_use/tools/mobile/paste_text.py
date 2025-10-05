@@ -16,7 +16,10 @@ from minitap.mobile_use.controllers.mobile_command_controller import (
 )
 from minitap.mobile_use.graph.state import State
 from minitap.mobile_use.tools.tool_wrapper import ToolWrapper
-from minitap.mobile_use.utils.ui_hierarchy import find_element_by_resource_id, get_element_text
+from minitap.mobile_use.utils.ui_hierarchy import (
+    find_element_by_resource_id,
+    get_element_text,
+)
 
 
 def get_paste_text_tool(ctx: MobileUseContext):
@@ -45,7 +48,8 @@ def get_paste_text_tool(ctx: MobileUseContext):
         state.latest_ui_hierarchy = screen_data.elements
 
         element = find_element_by_resource_id(
-            ui_hierarchy=state.latest_ui_hierarchy, resource_id=focused_element_resource_id
+            ui_hierarchy=state.latest_ui_hierarchy,
+            resource_id=focused_element_resource_id,
         )
 
         if element:

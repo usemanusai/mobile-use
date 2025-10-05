@@ -16,7 +16,9 @@ ENV_TCP_PORT = int(os.getenv("ADB_TCP_PORT", "5555") or 5555)
 ENV_MAX_RETRIES = int(os.getenv("ADB_CONNECT_MAX_RETRIES", "5") or 5)
 ENV_BACKOFF_START = float(os.getenv("ADB_CONNECT_BACKOFF_START", "1.0") or 1.0)
 ENV_BACKOFF_FACTOR = float(os.getenv("ADB_CONNECT_BACKOFF_FACTOR", "1.7") or 1.7)
-ENV_PREFERRED_METHODS = [m.strip() for m in os.getenv("ADB_PREFERRED_METHODS", "env,mdns,usb_tcpip,pairing").split(",")]
+ENV_PREFERRED_METHODS = [
+    m.strip() for m in os.getenv("ADB_PREFERRED_METHODS", "env,mdns,usb_tcpip,pairing").split(",")
+]
 
 # Pairing: Android 11+
 ENV_PAIR_HOST_PORT = os.getenv("ADB_PAIR_HOST_PORT", "").strip()  # e.g. "192.168.1.50:37099"
@@ -209,4 +211,3 @@ def attempt_auto_connect() -> str | None:
 
     logger.error("[ADB-AUTO] All ADB TCP methods failed. See logs for details.")
     return None
-

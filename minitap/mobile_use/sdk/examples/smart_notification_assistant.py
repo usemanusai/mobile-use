@@ -43,7 +43,8 @@ class Notification(BaseModel):
     title: str = Field(..., description="Title/header of the notification")
     message: str = Field(..., description="Message content of the notification")
     priority: NotificationPriority = Field(
-        default=NotificationPriority.MEDIUM, description="Priority level of notification"
+        default=NotificationPriority.MEDIUM,
+        description="Priority level of notification",
     )
 
 

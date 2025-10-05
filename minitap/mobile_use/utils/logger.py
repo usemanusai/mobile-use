@@ -67,7 +67,8 @@ class MobileUseLogger:
         file_handler.setLevel(getattr(logging, level.upper()))
 
         file_formatter = logging.Formatter(
-            fmt="%(asctime)s | %(name)s | %(levelname)s | %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
+            fmt="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
         )
         file_handler.setFormatter(file_formatter)
 

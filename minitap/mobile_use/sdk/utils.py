@@ -3,7 +3,11 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from minitap.mobile_use.config import LLMConfig, deep_merge_llm_config, get_default_llm_config
+from minitap.mobile_use.config import (
+    LLMConfig,
+    deep_merge_llm_config,
+    get_default_llm_config,
+)
 from minitap.mobile_use.utils.file import load_jsonc
 from minitap.mobile_use.utils.logger import get_logger
 

@@ -28,10 +28,14 @@ from minitap.mobile_use.controllers.mobile_command_controller import (
     ScreenDataResponse,
     get_screen_data,
 )
-from minitap.mobile_use.controllers.platform_specific_commands_controller import get_first_device
+from minitap.mobile_use.controllers.platform_specific_commands_controller import (
+    get_first_device,
+)
 from minitap.mobile_use.graph.graph import get_graph
 from minitap.mobile_use.graph.state import State
-from minitap.mobile_use.sdk.builders.agent_config_builder import get_default_agent_config
+from minitap.mobile_use.sdk.builders.agent_config_builder import (
+    get_default_agent_config,
+)
 from minitap.mobile_use.sdk.builders.task_request_builder import TaskRequestBuilder
 from minitap.mobile_use.sdk.constants import (
     DEFAULT_HW_BRIDGE_BASE_URL,
@@ -46,7 +50,12 @@ from minitap.mobile_use.sdk.types.exceptions import (
     ExecutableNotFoundError,
     ServerStartupError,
 )
-from minitap.mobile_use.sdk.types.task import AgentProfile, Task, TaskRequest, TaskStatus
+from minitap.mobile_use.sdk.types.task import (
+    AgentProfile,
+    Task,
+    TaskRequest,
+    TaskStatus,
+)
 from minitap.mobile_use.servers.device_hardware_bridge import BridgeStatus
 from minitap.mobile_use.servers.start_servers import (
     start_device_hardware_bridge,
@@ -240,6 +249,7 @@ class Agent:
             # Attempt automatic ADB TCP connection strategies before querying devices
             try:
                 from minitap.mobile_use.utils import adb_auto_connect
+
                 adb_auto_connect.attempt_auto_connect()
             except Exception as e:
                 logger.warning(f"ADB auto-connect attempt error: {e}")

@@ -42,7 +42,13 @@ class DeviceHardwareBridge:
                 creation_flags = subprocess.CREATE_NO_WINDOW
 
             maestro_platform = "android" if self.platform == DevicePlatform.ANDROID else "ios"
-            cmd = ["maestro", "--device", self.device_id, "--platform", maestro_platform]
+            cmd = [
+                "maestro",
+                "--device",
+                self.device_id,
+                "--platform",
+                maestro_platform,
+            ]
             if self.adb_host is not None:
                 cmd.append(f"--host={self.adb_host}")
             cmd.extend(["studio", "--no-window"])

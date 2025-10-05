@@ -91,7 +91,10 @@ async def test_outputter_with_pydantic_model(mock_get_llm, mock_context, mock_st
     # Mock the structured LLM response
     mock_structured_llm = AsyncMock()
     mock_structured_llm.ainvoke.return_value = MockPydanticSchema(
-        color="green", price=20, currency_symbol="$", website_url="http://superwebsite.fr"
+        color="green",
+        price=20,
+        currency_symbol="$",
+        website_url="http://superwebsite.fr",
     )
 
     # Mock the base LLM

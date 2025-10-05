@@ -22,7 +22,10 @@ from minitap.mobile_use.agents.summarizer.summarizer import SummarizerNode
 from minitap.mobile_use.constants import EXECUTOR_MESSAGES_KEY
 from minitap.mobile_use.context import MobileUseContext
 from minitap.mobile_use.graph.state import State
-from minitap.mobile_use.tools.index import EXECUTOR_WRAPPERS_TOOLS, get_tools_from_wrappers
+from minitap.mobile_use.tools.index import (
+    EXECUTOR_WRAPPERS_TOOLS,
+    get_tools_from_wrappers,
+)
 from minitap.mobile_use.utils.logger import get_logger
 
 logger = get_logger(__name__)

@@ -5,7 +5,11 @@ from pathlib import Path
 from jinja2 import Template
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from minitap.mobile_use.agents.planner.types import PlannerOutput, Subgoal, SubgoalStatus
+from minitap.mobile_use.agents.planner.types import (
+    PlannerOutput,
+    Subgoal,
+    SubgoalStatus,
+)
 from minitap.mobile_use.agents.planner.utils import one_of_them_is_failure
 from minitap.mobile_use.context import MobileUseContext
 from minitap.mobile_use.graph.state import State

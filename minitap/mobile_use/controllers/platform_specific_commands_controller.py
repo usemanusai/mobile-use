@@ -65,7 +65,15 @@ def get_device_date(ctx: MobileUseContext) -> str:
 
 def list_packages(ctx: MobileUseContext) -> str:
     if ctx.device.mobile_platform == DevicePlatform.IOS:
-        cmd = ["xcrun", "simctl", "listapps", "booted", "|", "grep", "CFBundleIdentifier"]
+        cmd = [
+            "xcrun",
+            "simctl",
+            "listapps",
+            "booted",
+            "|",
+            "grep",
+            "CFBundleIdentifier",
+        ]
         return run_shell_command_on_host(" ".join(cmd))
     else:
         device = get_adb_device(ctx)

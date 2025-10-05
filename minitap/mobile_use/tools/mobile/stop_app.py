@@ -8,7 +8,9 @@ from langgraph.types import Command
 
 from minitap.mobile_use.constants import EXECUTOR_MESSAGES_KEY
 from minitap.mobile_use.context import MobileUseContext
-from minitap.mobile_use.controllers.mobile_command_controller import stop_app as stop_app_controller
+from minitap.mobile_use.controllers.mobile_command_controller import (
+    stop_app as stop_app_controller,
+)
 from minitap.mobile_use.graph.state import State
 from minitap.mobile_use.tools.tool_wrapper import ToolWrapper
 

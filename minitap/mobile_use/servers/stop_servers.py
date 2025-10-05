@@ -5,7 +5,9 @@ import psutil
 import requests
 
 from minitap.mobile_use.servers.config import server_settings
-from minitap.mobile_use.servers.device_hardware_bridge import DEVICE_HARDWARE_BRIDGE_PORT
+from minitap.mobile_use.servers.device_hardware_bridge import (
+    DEVICE_HARDWARE_BRIDGE_PORT,
+)
 from minitap.mobile_use.utils.logger import get_server_logger
 
 logger = get_server_logger()
