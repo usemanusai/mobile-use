@@ -125,6 +125,11 @@ When you run the scripts above without extra arguments, Mobile-Use now starts a 
 
 See WEB_GUI.md for full details.
 
+#### Wireless ADB (no root)
+
+See WIRELESS_ADB.md for automatic ADB over Wi‑Fi connection methods (Android 11+ Wireless Debugging, USB‑initiated tcpip, mDNS discovery, and env‑based direct connects). Configure via `.env` and `docker-compose.yml`.
+
+
 
 #### 🧰 Troubleshooting
 

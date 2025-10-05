@@ -238,6 +238,13 @@ class Agent:
 
         # Complete deferred device setup if GUI-only init was used
         if getattr(self, "_deferred_device_setup", False):
+            # Attempt automatic ADB TCP connection strategies before querying devices
+            try:
+                from minitap.mobile_use.utils import adb_auto_connect
+                adb_auto_connect.attempt_auto_connect()
+            except Exception as e:
+                logger.warning(f"ADB auto-connect attempt error: {e}")
+
             device_id, platform = get_first_device()
             if not device_id or not platform:
                 raise DeviceNotFoundError(
