@@ -46,9 +46,9 @@ jobs:
       - name: Format (ruff, write changes)
         run: uvx ruff --version && uvx ruff format .
 
-      - name: Run tests (pytest + coverage)
+      - name: Run tests (pytest)
         run: |
-          uvx pytest -q --maxfail=1 --disable-warnings --cov --cov-report=xml
+          uvx pytest -q --maxfail=1 --disable-warnings
 
       - name: Build package
         run: |
