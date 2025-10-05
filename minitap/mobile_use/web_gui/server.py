@@ -122,7 +122,13 @@ async def on_startup():
     await broadcaster.publish({"type": "queue", "size": 0})
     # Optionally start the persistent worker loop (can be disabled via AUTO_START_AGENT=0)
     if os.getenv("AUTO_START_AGENT", "1") == "1":
-        await manager.start()
+        try:
+            await manager.start()
+        except Exception as e:
+            logger.error(f"Agent auto-start failed: {e}. Server will stay up; submit a task to retry.")
+            manager.status = "Error"
+            await broadcaster.publish({"type": "error", "message": str(e)})
+            await broadcaster.publish({"type": "status", "status": manager.status})
     else:
         manager.status = "Ready"
         await broadcaster.publish({"type": "status", "status": manager.status})
