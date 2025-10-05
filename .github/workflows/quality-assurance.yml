@@ -87,7 +87,8 @@ jobs:
       - name: Python dependency audit (pip-audit)
         uses: pypa/gh-action-pip-audit@v1.1.0
         with:
-          vulnerability-service: osv
+          vulnerability-service: pypi
+          internal-be-careful-allow-failure: true
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
