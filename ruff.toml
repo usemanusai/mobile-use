@@ -1,0 +1,17 @@
+target-version = "py312"
+line-length = 120
+
+# Only lint our source; exclude vendored or generated folders
+exclude = [
+  "nicegui/",
+  ".history/",
+  "query/",
+  "docs/",
+]
+
+[lint]
+select = ["E", "F", "W", "I", "B", "UP", "Q", "RUF"]
+ignore = [
+  "E501", # line too long
+]
+
