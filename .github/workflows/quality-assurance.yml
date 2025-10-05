@@ -41,20 +41,19 @@ jobs:
           uv sync --all-extras --dev --no-install-project
 
       - name: Lint (ruff)
-        run: uv run ruff --version && uv run ruff .
+        run: uvx ruff --version && uvx ruff .
 
       - name: Format check (black)
-        run: uv run black --version && uv run black --check .
+        run: uvx black --version && uvx black --check .
 
       - name: Run tests (pytest + coverage)
         run: |
-          uv run python -m pip install coverage pytest-cov
-          uv run pytest -q --maxfail=1 --disable-warnings --cov --cov-report=xml
+          uvx pytest -q --maxfail=1 --disable-warnings --cov --cov-report=xml
 
       - name: Build package
         run: |
-          uv run python -m pip install build
-          uv run python -m build
+          python -m pip install --upgrade build
+          python -m build
 
   security-scan:
     name: security-scan (SCA, SAST)
