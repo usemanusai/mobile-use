@@ -1,4 +1,6 @@
 name: Quality Assurance
+# Updated to skip editable install: uses 'uv sync --no-install-project'
+
 
 on:
   push:
@@ -31,10 +33,10 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v3
 
-      - name: Install project (uv)
+      - name: Install dependencies (uv, no editable project)
         run: |
           uv python install ${{ matrix.python-version }}
-          uv sync --all-extras --dev
+          uv sync --all-extras --dev --no-install-project
 
       - name: Lint (ruff)
         run: uv run ruff --version && uv run ruff .
@@ -102,3 +104,4 @@ jobs:
   #       uses: actions/checkout@v4
   #     # TODO: Build and deploy application to a temporary staging environment.
   #     # TODO: Run the E2E test suite (e.g., using Playwright or Cypress).
+
