@@ -245,8 +245,8 @@ async def api_enhance(req: Request):
         enhanced = msg.content if isinstance(msg.content, str) else str(msg.content)
         return {"ok": True, "enhanced": enhanced}
     except Exception as e:
-        logger.error(f"Enhance failed: {e}")
-        return {"ok": False, "error": str(e), "enhanced": text}
+        logger.error(f"Enhance failed: {e}", exc_info=True)
+        return {"ok": False, "error": "An internal error occurred while enhancing.", "enhanced": text}
 
 
 def run():
